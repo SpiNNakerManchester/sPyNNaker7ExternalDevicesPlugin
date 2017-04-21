@@ -384,38 +384,8 @@ def SpikeInjector(
         _process_database_socket(
             database_notify_port_num, database_notify_host,
             database_ack_port_num)
-    return SpynnakerExternalDeviceSpikeInjector(
-        n_neurons=n_neurons, label=label, port=port, virtual_key=virtual_key)
-
-def Spynnaker8SpikeInjector(
-        label=None, port=None, virtual_key=None, database_notify_host=None,
-        database_notify_port_num=None, database_ack_port_num=None):
-    """ Supports adding a spike injector to the application graph.
-
-    :param n_neurons: the number of neurons the spike injector will emulate
-    :type n_neurons: int
-    :param label: the label given to the population
-    :type label: str
-    :param port: the port number used to listen for injections of spikes
-    :type port: int
-    :param virtual_key: the virtual key used in the routing system
-    :type virtual_key: int
-    :param database_notify_host: the hostname for the device which is\
-            listening to the database notification.
-    :type database_notify_host: str
-    :param database_ack_port_num: the port number to which a external device\
-            will acknowledge that they have finished reading the database and\
-            are ready for it to start execution
-    :type database_ack_port_num: int
-    :param database_notify_port_num: The port number to which a external\
-            device will receive the database is ready command
-    :type database_notify_port_num: int
-    """
-    _process_database_socket(
-        database_notify_port_num, database_notify_host, database_ack_port_num)
     return ExternalDeviceSpikeInjector(
-        label=label, port=port, virtual_key=virtual_key)
-
+        n_neurons=n_neurons, label=label, port=port, virtual_key=virtual_key)
 
 def _process_database_socket(
         database_notify_port_num, database_notify_host, database_ack_port_num):
