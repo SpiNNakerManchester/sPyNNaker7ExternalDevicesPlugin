@@ -2,8 +2,6 @@ import os
 from setuptools import setup
 from collections import defaultdict
 
-exec(open("spynnaker7/pyNN/_version.py").read())
-
 if os.environ.get('READTHEDOCS', None) == 'True':
     # scipy must be added in config.py as a mock
     install_requires = ['sPyNNaker7 >= 3.0.0, < 4.0.0',
@@ -42,7 +40,8 @@ for dirname, dirnames, filenames in os.walk(main_package_dir):
             package_data[package].append(filename)
 
 setup(
-    name="sPyNNaker7ExternalDevicesPlugin", version="3.0.0",
+    name="sPyNNaker7ExternalDevicesPlugin",
+    version="3.0.0",
     description="Spinnaker External Devices Plugin extended for PyNN7",
     url="https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin",
     packages=packages,
