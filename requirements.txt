@@ -1,5 +1,5 @@
 sPyNNaker7 >= 4.0.0, < 5.0.0
-sPyNNakerExternalDevicesPlugin == 1!4.0.0a3'
+sPyNNakerExternalDevicesPlugin == 1!4.0.0a3
 pyNN >= 0.7, < 0.8
 numpy
 scipy
