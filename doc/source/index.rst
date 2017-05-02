@@ -19,8 +19,8 @@ SpiNNFrontEndCommon_, sPyNNaker_, sPyNNaker7_, sPyNNakerExternalDevicesPlugin_ (
 .. _Combined_documentation: http://spinnaker7manchester.readthedocs.io
 
 
-sPyNNakerExternalDevicesPlugin
-==============================
+sPyNNaker7ExternalDevicesPlugin
+===============================
 
 .. automodule:: spynnaker7_external_devices_plugin
 
