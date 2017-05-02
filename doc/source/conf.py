@@ -55,9 +55,10 @@ intersphinx_mapping = {'spinn_machine':
                        'data_specification': (ds_link, None),
                        'spinn_front_end_common': (fe_link, None),
                        'spynnaker':
-                           ("http://spynnaker.readthedocs.io/en/latest/", None)
+                           ("http://spynnaker.readthedocs.io/en/latest/", None),
                        'spynnaker7':
-                           ("http://spynnaker7.readthedocs.io/en/latest/", None)
+                           ("http://spynnaker7.readthedocs.io/en/latest/",
+                            None),
                        'spynnaker_external_devices_plugin':
                            (edp_link, None)
                        }
@@ -368,9 +369,8 @@ for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
 # Do the rst generation
-# Commented out until it can be fixed on a branch
-# for f in os.listdir("."):
-#    if (os.path.isfile(f) and f.endswith(
-#            ".rst") and f != "index.rst" and f != "modules.rst"):
-#        os.remove(f)
-# apidoc.main([None, '-o', ".", "../../spynnaker_external_devices_plugin"])
+for f in os.listdir("."):
+    if (os.path.isfile(f) and f.endswith(
+            ".rst") and f != "index.rst" and f != "modules.rst"):
+        os.remove(f)
+apidoc.main([None, '-o', ".", "../../spynnaker_external_devices_plugin"])
