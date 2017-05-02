@@ -55,7 +55,8 @@ intersphinx_mapping = {'spinn_machine':
                        'data_specification': (ds_link, None),
                        'spinn_front_end_common': (fe_link, None),
                        'spynnaker':
-                           ("http://spynnaker.readthedocs.io/en/latest/", None),
+                           ("http://spynnaker.readthedocs.io/en/latest/",
+                            None),
                        'spynnaker7':
                            ("http://spynnaker7.readthedocs.io/en/latest/",
                             None),

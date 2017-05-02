@@ -39,11 +39,13 @@ for dirname, dirnames, filenames in os.walk(main_package_dir):
                 main_package, dirname[start:].replace(os.sep, '.'))
             package_data[package].append(filename)
 
+url = "https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin"
+
 setup(
     name="sPyNNaker7ExternalDevicesPlugin",
     version="1!4.0.0a3",
     description="Spinnaker External Devices Plugin extended for PyNN7",
-    url="https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin",
+    url=url,
     packages=packages,
     package_data=package_data,
     install_requires=install_requires
