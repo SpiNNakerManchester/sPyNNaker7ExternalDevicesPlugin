@@ -11,4 +11,4 @@
 # This need changing back to master before/when pushing to master
 -e git+https://github.com/SpiNNakerManchester/sPyNNaker7.git@pynn_0.8#egg=spynnaker7
 # This need changing back to master before/when pushing to master
--e git+https://github.com/SpiNNakerManchester/sPyNNakerExternalDevicesPlugin.git@pynn_0.8#egg=spynnaker7_external_devices_plugin
+-e git+https://github.com/SpiNNakerManchester/sPyNNakerExternalDevicesPlugin.git@pynn_0.8#egg=spynnaker_external_devices_plugin
