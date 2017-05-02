@@ -37,9 +37,8 @@ before_script:
   - echo '[Buffers]' >> ~/.spynnaker.cfg
 
 script:
-  # Disabled until fixed on a branch
-  # - py.test unittests
-  # - flake8 spynnaker_external_devices_plugin
+  - py.test unittests
+  - flake8 spynnaker7_external_devices_plugin
   # - flake8 unittests
   - cd doc/source
   - sphinx-build -T -E -b html -d _build/doctrees-readthedocsdirhtml -D language=en . _build/html
