@@ -2,18 +2,6 @@ import os
 from setuptools import setup
 from collections import defaultdict
 
-if os.environ.get('READTHEDOCS', None) == 'True':
-    # scipy must be added in config.py as a mock
-    install_requires = ['sPyNNaker7 >= 4.0.0, < 5.0.0',
-                        'sPyNNakerExternalDevicesPlugin == 1!4.0.0a3',
-                        'pyNN >= 0.7, < 0.8',
-                        'numpy', 'lxml', 'six', 'bitarray']
-else:
-    install_requires = ['sPyNNaker7 >= 4.0.0, < 5.0.0',
-                        'sPyNNakerExternalDevicesPlugin == 1!4.0.0a3',
-                        'pyNN >= 0.7, < 0.8',
-                        'numpy', 'scipy', 'lxml', 'six', 'bitarray']
-
 # Build a list of all project modules, as well as supplementary files
 main_package = "spynnaker7_external_devices_plugin"
 data_extensions = {".aplx", ".xml", ".json", ".xsd"}
@@ -48,5 +36,7 @@ setup(
     url=url,
     packages=packages,
     package_data=package_data,
-    install_requires=install_requires
+    install_requires=[
+        'sPyNNaker7 >= 1!4.0.0a5, < 1!5.0.0',
+        'sPyNNakerExternalDevicesPlugin >= 1!4.0.0a5, < 1!5.0.0']
 )
