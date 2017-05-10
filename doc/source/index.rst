@@ -1,11 +1,11 @@
-These pages document the python code for the sPyNNakerExternalDevicesPlugin_ module
+These pages document the python code for the sPyNNaker7ExternalDevicesPlugin_ module
 which is part of the SpiNNaker_ Project.
 
 This code depends on SpiNNUtils_, SpiNNMachine_, SpiNNStorageHandlers_, SpiNNMan_, PACMAN_, DataSpecification_,
 SpiNNFrontEndCommon_, sPyNNaker_, sPyNNaker7_, sPyNNakerExternalDevicesPlugin_ (Combined_documentation_).
 
 .. _SpiNNaker: http://apt.cs.manchester.ac.uk/projects/SpiNNaker
-.. _sPyNNakerExternalDevicesPlugin: https://github.com/SpiNNakerManchester/sPyNNakerExternalDevicesPlugin.git
+.. _sPyNNaker7ExternalDevicesPlugin: https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin.git
 .. _SpiNNUtils: http://spinnutils.readthedocs.io
 .. _SpiNNMachine: http://spinnmachine.readthedocs.io
 .. _SpiNNStorageHandlers: http://spinnstoragehandlers.readthedocs.io
@@ -15,12 +15,12 @@ SpiNNFrontEndCommon_, sPyNNaker_, sPyNNaker7_, sPyNNakerExternalDevicesPlugin_ (
 .. _SpiNNFrontEndCommon: http://spinnfrontendcommon.readthedocs.io
 .. _sPyNNaker: http://spynnaker.readthedocs.io
 .. _sPyNNaker7: http://spynnaker7.readthedocs.io
-.. _sPyNNaker7ExternalDevicesPlugin: http://spynnakerexternaldevicesplugin.readthedocs.io
+.. _sPyNNakerExternalDevicesPlugin: http://spynnakerexternaldevicesplugin.readthedocs.io
 .. _Combined_documentation: http://spinnaker7manchester.readthedocs.io
 
 
-sPyNNakerExternalDevicesPlugin
-==============================
+sPyNNaker7ExternalDevicesPlugin
+===============================
 
 .. automodule:: spynnaker7_external_devices_plugin
 

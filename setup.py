@@ -2,17 +2,9 @@ import os
 from setuptools import setup
 from collections import defaultdict
 
-if os.environ.get('READTHEDOCS', None) == 'True':
-    # scipy must be added in config.py as a mock
-    install_requires = ['sPyNNaker7 >= 3.0.0, < 4.0.0',
-                        'sPyNNakerExternalDevicesPlugin >= 3.0.0, < 4.0.0',
-                        'pyNN >= 0.7, < 0.8',
-                        'numpy', 'lxml', 'six', 'bitarray']
-else:
-    install_requires = ['sPyNNaker7 >= 3.0.0, < 4.0.0',
-                        'sPyNNakerExternalDevicesPlugin >= 3.0.0, < 4.0.0',
-                        'pyNN >= 0.7, < 0.8',
-                        'numpy', 'scipy', 'lxml', 'six', 'bitarray']
+__version__ = None
+exec(open("spynnaker7_external_devices_plugin/_version.py").read())
+assert __version__
 
 # Build a list of all project modules, as well as supplementary files
 main_package = "spynnaker7_external_devices_plugin"
@@ -39,17 +31,16 @@ for dirname, dirnames, filenames in os.walk(main_package_dir):
                 main_package, dirname[start:].replace(os.sep, '.'))
             package_data[package].append(filename)
 
+url = "https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin"
+
 setup(
     name="sPyNNaker7ExternalDevicesPlugin",
-    version="3.0.0",
+    version=__version__,
     description="Spinnaker External Devices Plugin extended for PyNN7",
-    url="https://github.com/SpiNNakerManchester/sPyNNaker7ExternalDevicesPlugin",
+    url=url,
     packages=packages,
     package_data=package_data,
-    install_requires=install_requires
+    install_requires=[
+        'sPyNNaker7 >= 1!4.0.0a5, < 1!5.0.0',
+        'sPyNNakerExternalDevicesPlugin >= 1!4.0.0a5, < 1!5.0.0']
 )
-
-url = "https://github.com/SpiNNakerManchester/SpyNNaker",
-packages = packages,
-package_data = package_data,
-install_requires = ['sPyNNaker >= 3.0.0, < 4.0.0']

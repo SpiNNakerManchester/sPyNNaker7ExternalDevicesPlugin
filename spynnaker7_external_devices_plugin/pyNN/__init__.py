@@ -387,6 +387,7 @@ def SpikeInjector(
     return ExternalDeviceSpikeInjector(
         n_neurons=n_neurons, label=label, port=port, virtual_key=virtual_key)
 
+
 def _process_database_socket(
         database_notify_port_num, database_notify_host, database_ack_port_num):
     """ code to handle building a database socket address as needed
