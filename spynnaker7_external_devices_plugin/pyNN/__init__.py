@@ -94,6 +94,8 @@ add_database_socket_address = \
     SpynnakerExternalDevicePluginManager.add_database_socket_address
 activate_live_output_to = \
     SpynnakerExternalDevicePluginManager.activate_live_output_to
+activate_live_output_for = \
+    SpynnakerExternalDevicePluginManager.activate_live_output_for
 
 # injector
 from spynnaker_external_devices_plugin.pyNN.utility_models.spike_injector \
@@ -139,31 +141,6 @@ __all__ = [
     "SpikeInjector"
 
 ]
-
-
-def activate_live_output_for(
-        population, database_notify_host=None,
-        database_notify_port_num=None,
-        database_ack_port_num=None, board_address=None, port=None,
-        host=None, tag=None, strip_sdp=True, use_prefix=False,
-        key_prefix=None,
-        prefix_type=None, message_type=EIEIOType.KEY_32_BIT,
-        right_shift=0, payload_as_time_stamps=True, notify=True,
-        use_payload_prefix=True, payload_prefix=None,
-        payload_right_shift=0, number_of_packets_sent_per_time_step=0):
-    spynnaker_external_devices.activate_live_output_for(
-        population=population, database_ack_port_num=database_ack_port_num,
-        database_notify_host=database_notify_host,
-        database_notify_port_num=database_notify_port_num,
-        board_address=board_address, port=port, host=host, tag=tag,
-        strip_sdp=strip_sdp, use_prefix=use_prefix, key_prefix=key_prefix,
-        prefix_type=prefix_type, message_type=message_type,
-        right_shift=right_shift, payload_as_time_stamps=payload_as_time_stamps,
-        notify=notify, use_payload_prefix=use_payload_prefix,
-        payload_prefix=payload_prefix,
-        payload_right_shift=payload_right_shift,
-        number_of_packets_sent_per_time_step=
-        number_of_packets_sent_per_time_step)
 
 
 def EthernetControl(
