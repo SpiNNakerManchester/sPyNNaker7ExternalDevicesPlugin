@@ -1,24 +1,20 @@
-"""
-The :py:mod:`spynnaker.pynn` package contains the front end specifications
-and implementation for the PyNN High-level API
-(http://neuralensemble.org/trac/PyNN)
-"""
-
+# general imports
 import logging
 import os
 
+# fec imports
 from spinn_front_end_common.abstract_models \
     .abstract_send_me_multicast_commands_vertex \
     import AbstractSendMeMulticastCommandsVertex
-from spinn_front_end_common.utilities import helpful_functions
 from spinn_front_end_common.utilities.notification_protocol.socket_address \
     import SocketAddress
 from spinn_front_end_common.utility_models.live_packet_gather \
     import LivePacketGather
+
+# spinnman imports
 from spinnman.messages.eieio.eieio_type import EIEIOType
 # main
 from spynnaker.pyNN.spinnaker_common import SpiNNakerCommon
-from spynnaker.pyNN.utilities import constants
 from spynnaker.pyNN.utilities import globals_variables
 from spynnaker_external_devices_plugin.pyNN import model_binaries
 from spynnaker_external_devices_plugin.pyNN.connections \
@@ -27,6 +23,7 @@ from spynnaker_external_devices_plugin.pyNN.connections \
     .ethernet_control_connection import EthernetControlConnection
 from spynnaker_external_devices_plugin.pyNN.connections \
     .spynnaker_live_spikes_connection import SpynnakerLiveSpikesConnection
+
 # connections
 from spynnaker_external_devices_plugin.pyNN.external_devices_models \
     .abstract_ethernet_controller import AbstractEthernetController
@@ -42,10 +39,12 @@ from spynnaker_external_devices_plugin.pyNN.external_devices_models. \
     munich_spinnaker_link_motor_device import MunichMotorDevice
 from spynnaker_external_devices_plugin.pyNN.external_devices_models. \
     munich_spinnaker_link_retina_device import MunichRetinaDevice
+
 # PushBot Ethernet control
 from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot.\
     push_bot_control_modules.push_bot_lif_ethernet import \
     PushBotLifEthernet
+
 # PushBotSpiNNakerLink control
 from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot.\
     push_bot_control_modules.push_bot_lif_spinnaker_link \
@@ -82,6 +81,7 @@ from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot \
 from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot \
     .push_bot_spinnaker_link.push_bot_spinnaker_link_speaker_device \
     import PushBotSpiNNakerLinkSpeakerDevice
+
 # PushBot Parameters
 from spynnaker_external_devices_plugin.pyNN.protocols \
     .munich_io_spinnaker_link_protocol import MunichIoSpiNNakerLinkProtocol
@@ -89,15 +89,23 @@ from spynnaker_external_devices_plugin.pyNN. \
     spynnaker_external_device_plugin_manager import \
     SpynnakerExternalDevicePluginManager
 
-# injector for spynnaker 7
+# useful functions
+add_database_socket_address = \
+    SpynnakerExternalDevicePluginManager.add_database_socket_address
+activate_live_output_to = \
+    SpynnakerExternalDevicePluginManager.activate_live_output_to
+
+# injector
 from spynnaker_external_devices_plugin.pyNN.utility_models.spike_injector \
     import SpikeInjector as ExternalDeviceSpikeInjector
+
 
 logger = logging.getLogger(__name__)
 
 SpiNNakerCommon.register_binary_search_path(
     os.path.dirname(model_binaries.__file__))
 spynnaker_external_devices = SpynnakerExternalDevicePluginManager()
+
 
 __all__ = [
     "EIEIOType",
@@ -133,122 +141,29 @@ __all__ = [
 ]
 
 
-def add_database_socket_address(
-        database_notify_host, database_notify_port_num, database_ack_port_num):
-
-    config = globals_variables.get_simulator().config
-    if database_notify_port_num is None:
-        database_notify_port_num = helpful_functions.read_config_int(
-            config, "Database", "notify_port")
-    if database_notify_host is None:
-        database_notify_host = helpful_functions.read_config(
-            config, "Database", "notify_hostname")
-    elif database_notify_host == "0.0.0.0":
-        database_notify_host = "localhost"
-    if database_ack_port_num is None:
-        database_ack_port_num = helpful_functions.read_config_int(
-            config, "Database", "listen_port")
-
-    # build the database socket address used by the notification interface
-    database_socket = SocketAddress(
-        listen_port=database_ack_port_num,
-        notify_host_name=database_notify_host,
-        notify_port_no=database_notify_port_num)
-
-    # update socket interface with new demands.
-    spynnaker_external_devices.add_socket_address(database_socket)
-
-
 def activate_live_output_for(
-        population, database_notify_host=None, database_notify_port_num=None,
+        population, database_notify_host=None,
+        database_notify_port_num=None,
         database_ack_port_num=None, board_address=None, port=None,
-        host=None, tag=None, strip_sdp=True, use_prefix=False, key_prefix=None,
+        host=None, tag=None, strip_sdp=True, use_prefix=False,
+        key_prefix=None,
         prefix_type=None, message_type=EIEIOType.KEY_32_BIT,
         right_shift=0, payload_as_time_stamps=True, notify=True,
         use_payload_prefix=True, payload_prefix=None,
         payload_right_shift=0, number_of_packets_sent_per_time_step=0):
-    """ Output the spikes from a given population from SpiNNaker as they
-        occur in the simulation
-
-    :param population: The population to activate the live output for
-    :type population: spynnaker.pyNN.models.pynn_population.Population
-    :param database_notify_host: the hostname for the device which is\
-            listening to the database notification.
-    :type database_notify_host: str
-    :param database_ack_port_num: the port number to which a external device\
-            will acknowledge that they have finished reading the database and\
-            are ready for it to start execution
-    :type database_ack_port_num: int
-    :param database_notify_port_num: The port number to which a external\
-            device will receive the database is ready command
-    :type database_notify_port_num: int
-    :param board_address: A fixed board address required for the tag, or\
-            None if any address is OK
-    :type board_address: str
-    :param key_prefix: the prefix to be applied to the key
-    :type key_prefix: int or None
-    :param prefix_type: if the prefix type is 32 bit or 16 bit
-    :param message_type: if the message is a eieio_command message, or\
-            eieio data message with 16 bit or 32 bit keys.
-    :param payload_as_time_stamps:
-    :param right_shift:
-    :param use_payload_prefix:
-    :param notify:
-    :param payload_prefix:
-    :param payload_right_shift:
-    :param number_of_packets_sent_per_time_step:
-    :param port: The UDP port to which the live spikes will be sent.  If not\
-                specified, the port will be taken from the "live_spike_port"\
-                parameter in the "Recording" section of the spynnaker cfg file.
-    :type port: int
-    :param host: The host name or IP address to which the live spikes will be\
-                sent.  If not specified, the host will be taken from the\
-                "live_spike_host" parameter in the "Recording" section of the\
-                spynnaker cfg file.
-    :type host: str
-    :param tag: The IP tag to be used for the spikes.  If not specified, one\
-                will be automatically assigned
-    :type tag: int
-    :param strip_sdp: Determines if the SDP headers will be stripped from the\
-                transmitted packet.
-    :type strip_sdp: bool
-    :param use_prefix: Determines if the spike packet will contain a common\
-                prefix for the spikes
-    :type use_prefix: bool
-    """
-
-    config = globals_variables.get_simulator().config
-    # get default params if none set
-    if port is None:
-        port = config.getint("Recording", "live_spike_port")
-    if host is None:
-        host = config.get("Recording", "live_spike_host")
-
-    # add new edge and vertex if required to spinnaker graph
-    spynnaker_external_devices.add_edge_to_recorder_vertex(
-        population._vertex, port, host, tag, board_address, strip_sdp,
-        use_prefix, key_prefix, prefix_type, message_type, right_shift,
-        payload_as_time_stamps, use_payload_prefix, payload_prefix,
-        payload_right_shift, number_of_packets_sent_per_time_step)
-
-    if notify:
-        add_database_socket_address(
-            database_notify_host, database_notify_port_num,
-            database_ack_port_num)
-
-
-def activate_live_output_to(population, device):
-    """ Activate the output of spikes from a population to an external device.\
-        Note that all spikes will be sent to the device.
-
-    :param population: The pyNN population object from which spikes will be\
-                sent.
-    :param device: The pyNN population external device to which the spikes\
-                will be sent.
-    """
-    spynnaker_external_devices.add_edge(
-        population._get_vertex, device._get_vertex,
-        constants.SPIKE_PARTITION_ID)
+    spynnaker_external_devices.activate_live_output_for(
+        population=population, database_ack_port_num=database_ack_port_num,
+        database_notify_host=database_notify_host,
+        database_notify_port_num=database_notify_port_num,
+        board_address=board_address, port=port, host=host, tag=tag,
+        strip_sdp=strip_sdp, use_prefix=use_prefix, key_prefix=key_prefix,
+        prefix_type=prefix_type, message_type=message_type,
+        right_shift=right_shift, payload_as_time_stamps=payload_as_time_stamps,
+        notify=notify, use_payload_prefix=use_payload_prefix,
+        payload_prefix=payload_prefix,
+        payload_right_shift=payload_right_shift,
+        number_of_packets_sent_per_time_step=
+        number_of_packets_sent_per_time_step)
 
 
 def EthernetControl(
