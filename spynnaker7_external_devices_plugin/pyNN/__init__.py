@@ -16,7 +16,6 @@ from spinn_front_end_common.utility_models.live_packet_gather \
 from spinnman.messages.eieio.eieio_type import EIEIOType
 # main
 from spynnaker.pyNN.abstract_spinnaker_common import AbstractSpiNNakerCommon
-from spynnaker.pyNN.utilities import constants
 from spynnaker_external_devices_plugin.pyNN import model_binaries
 from spynnaker_external_devices_plugin.pyNN.connections \
     .ethernet_command_connection import EthernetCommandConnection
@@ -90,6 +89,10 @@ from spynnaker_external_devices_plugin.pyNN. \
     spynnaker_external_device_plugin_manager import \
     SpynnakerExternalDevicePluginManager
 
+# injector
+from spynnaker_external_devices_plugin.pyNN.utility_models.spike_injector \
+    import SpikeInjector as ExternalDeviceSpikeInjector
+
 # useful functions
 add_database_socket_address = \
     SpynnakerExternalDevicePluginManager.add_database_socket_address
@@ -97,10 +100,6 @@ activate_live_output_to = \
     SpynnakerExternalDevicePluginManager.activate_live_output_to
 activate_live_output_for = \
     SpynnakerExternalDevicePluginManager.activate_live_output_for
-
-# injector
-from spynnaker_external_devices_plugin.pyNN.utility_models.spike_injector \
-    import SpikeInjector as ExternalDeviceSpikeInjector
 
 
 logger = logging.getLogger(__name__)
