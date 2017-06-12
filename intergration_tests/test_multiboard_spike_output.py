@@ -43,5 +43,6 @@ class TestMultiBoardSpikeOutput(BaseTestCase):
                 TestMultiBoardSpikeOutput.counts[label], label)
             self.assertEqual(TestMultiBoardSpikeOutput.counts[label], 1000)
 
+
 if __name__ == '__main__':
     unittest.main()
