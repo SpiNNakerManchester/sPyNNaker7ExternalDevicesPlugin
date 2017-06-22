@@ -83,6 +83,22 @@ from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot \
     import PushBotSpiNNakerLinkSpeakerDevice
 
 # PushBot Parameters
+from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
+    push_bot_parameters.push_bot_motor import PushBotMotor
+from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
+    push_bot_parameters.push_bot_retina_resolution import \
+    PushBotRetinaResolution
+from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
+    push_bot_parameters.push_bot_laser import PushBotLaser
+
+# push bot retina viewer
+from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
+    push_bot_parameters.push_bot_retina_viewer import PushBotRetinaViewer
+
+from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
+    push_bot_parameters.push_bot_speaker import PushBotSpeaker
+
+# other plugins
 from spynnaker_external_devices_plugin.pyNN.protocols \
     .munich_io_spinnaker_link_protocol import MunichIoSpiNNakerLinkProtocol
 from spynnaker_external_devices_plugin.pyNN. \
