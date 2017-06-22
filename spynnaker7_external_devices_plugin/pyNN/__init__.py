@@ -84,8 +84,6 @@ from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot \
 
 # PushBot Parameters
 from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
-    push_bot_parameters.push_bot_led import PushBotLED
-from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
     push_bot_parameters.push_bot_motor import PushBotMotor
 from spynnaker_external_devices_plugin.pyNN.external_devices_models.push_bot. \
     push_bot_parameters.push_bot_retina_resolution import \
